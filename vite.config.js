@@ -1,4 +1,5 @@
 export default {
+  base: '/quiz/',
   server: {
     headers: {
       'Access-Control-Allow-Origin': '*',

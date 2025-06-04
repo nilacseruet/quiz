@@ -1,0 +1,16 @@
+{
+    "groups": [
+        {
+            "value": "Fatir",
+            "label": "Fatir"
+        },
+        {
+            "value": "Maimunah",
+            "label": "Maimunah"
+        },
+        {
+            "value": "Others",
+            "label": "Others"
+        }
+    ]
+}

@@ -5,7 +5,7 @@ import { getAuth, signInAnonymously } from 'firebase/auth';
 // Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyB-ve_suzb3nULDHJE4G_gkHQcMx97asf8",
-  authDomain: "quize-44349.firebaseapp.com",
+  authDomain: "nilacseruet.github.io",
   projectId: "quize-44349",
   storageBucket: "quize-44349.firebasestorage.app",
   messagingSenderId: "80986581205",
@@ -21,7 +21,7 @@ const db = getFirestore(app);
 // Load quiz questions
 async function loadQuestions() {
     try {
-        const response = await fetch('/questions.json');
+        const response = await fetch('input/questions.json');
         const data = await response.json();
         return data.questions;
     } catch (error) {
@@ -109,7 +109,7 @@ let groupOptions = [];
 // Load group options
 async function loadGroups() {
     try {
-        const response = await fetch('/group.json');
+        const response = await fetch('input/group.json');
         const data = await response.json();
         return data.groups;
     } catch (error) {
