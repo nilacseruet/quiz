@@ -107,6 +107,21 @@ let quizQuestions = [];
 let groupOptions = [];
 
 // Load group options
+async function loadQuizTitle() {
+    try {
+        const response = await fetch('/group.json', { cache: 'no-store' });
+        const data = await response.json();
+        document.getElementById('quiz_title').innerHTML = data.quiz_title;
+
+        console.log('Quiz title loaded:', data.quiz_title);
+        return data.quiz_title;
+    } catch (error) {
+        console.error('Error loading quiz_title:', error);
+        throw error;
+    }
+}
+
+// Load group options
 async function loadGroups() {
     try {
         const response = await fetch('input/group.json');
@@ -198,7 +213,8 @@ async function handleSubmit(e) {
         // Validate name and group
         const name = document.getElementById('name').value.trim();
         const group = document.getElementById('group').value;
-        
+        const quizTitle = document.getElementById('quiz_title').textContent;
+q
         if (!name) {
             throw new Error('Please enter your name');
         }
@@ -219,6 +235,7 @@ async function handleSubmit(e) {
             Name: name,
             Group: group,
             Marks: marks,
+            Quiz_title: quizTitle,
             Percentage: parseFloat(scoreData.percentage.toFixed(2)),
             Timestamp: new Date().toISOString(),
             UserId: auth.currentUser.uid
@@ -254,7 +271,8 @@ async function init() {
         // Load questions and groups
         [quizQuestions, groupOptions] = await Promise.all([
             loadQuestions(),
-            loadGroups()
+            loadGroups(),
+            loadQuizTitle()
         ]);
 
         // Generate quiz form and populate groups
