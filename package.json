@@ -1,7 +1,7 @@
 {
   "name": "firestore-app",
   "version": "1.0.0",
-  "main": "dist/index.js",
+  "main": "index.js",
   "type": "module",
   "scripts": {
     "dev": "vite",
