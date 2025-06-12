@@ -109,7 +109,7 @@ let groupOptions = [];
 // Load group options
 async function loadQuizTitle() {
     try {
-        const response = await fetch('/group.json', { cache: 'no-store' });
+        const response = await fetch('input/group.json', { cache: 'no-store' });
         const data = await response.json();
         document.getElementById('quiz_title').innerHTML = data.quiz_title;
 
@@ -214,7 +214,7 @@ async function handleSubmit(e) {
         const name = document.getElementById('name').value.trim();
         const group = document.getElementById('group').value;
         const quizTitle = document.getElementById('quiz_title').textContent;
-q
+
         if (!name) {
             throw new Error('Please enter your name');
         }
