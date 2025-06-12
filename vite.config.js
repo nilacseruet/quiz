@@ -19,7 +19,7 @@ export default ({ mode }) => {
   }
   // Production configuration
   else {
-    config.base = '/dist/'  // Serve from the dist directory in production
+    config.base = '/quiz/'  // Serve from the dist directory in production
   }
 
   return config
