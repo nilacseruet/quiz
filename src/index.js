@@ -1,7 +1,3 @@
-import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, addDoc } from 'firebase/firestore';
-import { getAuth, signInAnonymously } from 'firebase/auth';
-
 // Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyB-ve_suzb3nULDHJE4G_gkHQcMx97asf8",
@@ -14,9 +10,9 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const db = firebase.firestore();
 
 // Load quiz questions
 async function loadQuestions() {
@@ -242,8 +238,7 @@ async function handleSubmit(e) {
         };
 
         // Save to Firestore
-        const quizCollection = collection(db, "quiz");
-        await addDoc(quizCollection, quizData);
+        await db.collection("quiz").add(quizData);
 
         // Show results and highlight answers
         displayScore(scoreData);
@@ -286,7 +281,7 @@ async function init() {
         });
         
         // Attempt anonymous sign in
-        await signInAnonymously(auth);
+        await auth.signInAnonymously();
         console.log('Anonymous authentication initiated');
 
         // Set up form submission handler
