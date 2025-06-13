@@ -1,18 +1,6 @@
-// Firebase configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyB-ve_suzb3nULDHJE4G_gkHQcMx97asf8",
-  authDomain: "nilacseruet.github.io",
-  projectId: "quize-44349",
-  storageBucket: "quize-44349.firebasestorage.app",
-  messagingSenderId: "80986581205",
-  appId: "1:80986581205:web:b44731bdefbf15a8959a5c",
-  measurementId: "G-K3XP09NTJ1"
-};
-
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
-const db = firebase.firestore();
+// Use Firebase instances from window object
+const { auth, db } = window;
+const { collection, addDoc, signInAnonymously, onAuthStateChanged } = window.firebase;
 
 // Load quiz questions
 async function loadQuestions() {
@@ -238,7 +226,7 @@ async function handleSubmit(e) {
         };
 
         // Save to Firestore
-        await db.collection("quiz").add(quizData);
+        await addDoc(collection(db, "quiz"), quizData);
 
         // Show results and highlight answers
         displayScore(scoreData);
@@ -275,13 +263,13 @@ async function init() {
         populateGroupSelect(groupOptions);
 
         // Set up auth state listener
-        auth.onAuthStateChanged((user) => {
+        onAuthStateChanged(auth, (user) => {
             console.log('Auth state changed:', user ? 'authenticated' : 'not authenticated');
             updateAuthState(user);
         });
         
         // Attempt anonymous sign in
-        await auth.signInAnonymously();
+        await signInAnonymously(auth);
         console.log('Anonymous authentication initiated');
 
         // Set up form submission handler
